@@ -1,0 +1,95 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+
+body { display: flex; height: 100vh; }
+
+.left-panel { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #ffffff; padding: 2rem; }
+.right-panel { flex: 1; display: flex; flex-direction: column; justify-content: center; background-color: #9e9e9e; padding: 4rem; color: #333; }
+
+.profile-img { width: 250px; height: 250px; object-fit: cover; margin-bottom: 1.5rem; background-color: #ddd; border-radius: 50%; }
+
+h1 { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; color: #000; }
+h2 { font-size: 1.5rem; font-weight: normal; color: #555; margin-bottom: 2rem; }
+
+.btn { padding: 1rem 2rem; background-color: #333; color: white; text-decoration: none; border: none; cursor: pointer; font-size: 1rem; text-align: center; display: inline-block; transition: background 0.3s; }
+.btn:hover { background-color: #111; }
+
+.social-icons { display: flex; gap: 1.5rem; margin-top: 2rem; }
+
+/* Styling khusus untuk gambar logo sosmed */
+.sosmed-logo { width: 30px; height: 30px; object-fit: contain; transition: transform 0.2s; }
+.sosmed-logo:hover { transform: scale(1.1); }
+
+.about-title { font-size: 3rem; margin-bottom: 1.5rem; font-weight: bold; }
+.about-text { font-size: 1.2rem; line-height: 1.6; margin-bottom: 3rem; }
+
+.action-buttons { display: flex; gap: 1rem; }
+.action-buttons .btn { flex: 1; }
+
+/* Variabel & Kelas Dark Mode */
+body.dark-mode .left-panel { background-color: #1a1a1a; color: #ffffff; }
+body.dark-mode .right-panel { background-color: #2d2d2d; color: #ffffff; }
+body.dark-mode h1, body.dark-mode h2, body.dark-mode .social-icons a { color: #ffffff; }
+
+/* Indikator Active Link */
+.action-buttons .btn.active {
+    background-color: #007bff; /* Warna biru untuk link aktif */
+    border: 2px solid #ffffff;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    color: #000000; /* Warna SVG default (Terang = Hitam) */
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+}
+
+/* Interaksi saat disorot */
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Memastikan SVG menggunakan warna dari properti 'color' */
+.theme-toggle svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor; 
+}
+
+/* Mengubah warna ikon menjadi Putih saat mode gelap aktif */
+body.dark-mode .theme-toggle {
+    color: #ffffff;
+}
+
+/* ========================================= */
+/* MEDIA QUERY UNTUK LAYAR MOBILE (HP)       */
+/* ========================================= */
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column; /* Mengubah panel berdampingan menjadi atas-bawah */
+        height: auto;
+    }
+    
+    .left-panel {
+        padding: 3rem 1.5rem;
+    }
+
+    .right-panel {
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    h1 { font-size: 2rem; }
+    .profile-img { width: 200px; height: 200px; }
+    .about-title { font-size: 2.5rem; }
+    
+    .action-buttons {
+        flex-direction: column; /* Tombol menjadi atas bawah di layar kecil */
+    }
+}
