@@ -1,20 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // 1. FITUR DARK MODE
+    // =========================================
+    // 1. FITUR DARK MODE (Local Storage)
+    // =========================================
     const toggleBtn = document.getElementById('darkModeToggle');
     const body = document.body;
     
-    // Cek preferensi di Local Storage saat halaman dimuat
     if (localStorage.getItem('theme') === 'dark') {
         body.classList.add('dark-mode');
     }
     
-    // Logika ketika tombol ditekan (jika tombol tersedia di halaman)
     if (toggleBtn) {
         toggleBtn.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
-            
-            // Simpan preferensi ke Local Storage
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
             } else {
@@ -23,17 +21,38 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 2. FITUR ACTIVE LINK INDICATOR
-    // Membaca URL saat ini
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.action-buttons .btn');
-    
-    navLinks.forEach(link => {
-        // Jika atribut href pada tombol cocok dengan URL yang sedang dibuka
-        if (link.getAttribute('href').includes(currentPath.split('/').pop())) {
-            link.classList.add('active');
-        }
+    // =========================================
+    // 2. FITUR SCROLLSPY (Intersection Observer API)
+    // =========================================
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    // Pengaturan jarak sensor gulir (menyesuaikan tinggi navbar)
+    const observerOptions = {
+        root: null,
+        rootMargin: '-65px 0px -70% 0px', 
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Hapus penanda aktif dari semua link
+                navItems.forEach(item => item.classList.remove('active'));
+                
+                // Tambahkan penanda aktif hanya pada seksi yang sedang terlihat
+                const activeId = entry.target.getAttribute('id');
+                const activeLink = document.querySelector(`.nav-item[href="#${activeId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(sec => {
+        observer.observe(sec);
     });
 
-    console.log("Fungsi Dark Mode & Active Link berhasil dimuat.");
+    console.log("Single Page Application siap dijalankan.");
 });

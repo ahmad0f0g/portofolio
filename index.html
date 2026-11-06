@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Ahmad Fadhilah Gumantara</title>
+    <meta name="description" content="Halaman portofolio resmi Ahmad Fadhilah Gumantara.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sticky Navbar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#home" class="nav-item active">Welcome</a>
+            <a href="#profile" class="nav-item">Profil</a>
+            <a href="#matakuliah" class="nav-item">Mata Kuliah</a>
+            <a href="#tugas" class="nav-item">Tugas</a>
+        </div>
+        <!-- Toggle Dark Mode di dalam Navbar -->
+        <button id="darkModeToggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- 1. Hero Section (Beranda - Split Screen) -->
+    <section id="home" class="hero-section">
+        <div class="left-panel">
+            <img src="assets/fpBW.png" alt="Foto Ahmad Fadhilah Gumantara" class="profile-img">
+            <h1>Ahmad Fadhilah Gumantara</h1>
+            <h2>Software Engineer</h2>
+            <a href="mailto:ahmadfadhilahgumantara@gmail.com" class="btn">Email me</a>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/ahmad0f0g?srtk=YXNtZHR3Yzc3a3cy" target="_blank"><img src="assets/instagram.png" alt="Instagram" class="sosmed-logo"></a>
+                <a href="https://github.com/ahmad0f0g" target="_blank"><img src="assets/GitHub_Invertocat_Black_Clearspace.png" alt="GitHub" class="sosmed-logo"></a>
+                <a href="https://www.linkedin.com/in/ahmad-fadhilah-gumantara" target="_blank"><img src="assets/linkedin.png" alt="LinkedIn" class="sosmed-logo"></a>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div class="about-title">About Me</div>
+            <p class="about-text">
+                mahasiswa S1 jurusan teknik inforamatika di uin sunan gunung djati bandung yang antusias dalam bidang AI, memiliki ketertarikan dalam AI engineering, dan berkomitmen untuk terus mengembangkan keterampilan teknis serta berkontribusi pada proyek-proyek inovatif.</p>
+        </div>
+    </section>
+
+    <!-- 2. Profil Section (Full Width) -->
+    <section id="profile" class="full-width-section section-light">
+        <div class="container">
+            <h3 class="section-title">Profil Akademik & Profesional</h3>
+            <p class="section-desc">mahasiswa S1 jurusan teknik inforamatika di uin sunan gunung djati bandung yang antusias dalam bidang Ai, memiliki ketertarikan dalam ai engineering, dan berkomitmen untuk terus mengembangkan keterampilan teknis serta berkontribusi pada proyek-proyek inovatif.</p>
+        </div>
+    </section>
+
+    <!-- 3. Mata Kuliah Section (Full Width) -->
+    <section id="matakuliah" class="full-width-section section-dark">
+        <div class="container">
+            <h3 class="section-title">Daftar Mata Kuliah Semester Ini</h3>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Mata Kuliah</th>
+                            <th>Fokus Materi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Manajemen Perangkat Lunak</td>
+                            <td>senin, 07.00-09.30</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Manajemen Basis Data</td>
+                            <td>selasa, 10.00-12.00</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Intelegensia Buatan</td>
+                            <td>rabu, 15.30-18.00</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Interaksi Manusia dan Komputer</td>
+                            <td>kamis, 07.00-09.30</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Jaringan Komputer</td>
+                            <td>rabu, 09.30-12.00</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Pengembangan Aplikasi Mobile</td>
+                            <td>kamis, 09.30-12.00</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Pengembangan Aplikasi Web</td>
+                            <td>rabu, 15.30-18.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Tugas Section (Full Width) -->
+    <section id="tugas" class="full-width-section section-light">
+        <div class="container text-center">
+            <h3 class="section-title">Kumpulan Tugas</h3>
+            <h1 class="coming-soon">Coming Soon</h1>
+            <p class="section-desc">Modul tugas ini sedang dalam tahap persiapan untuk mengarsipkan studi kasus mandiri.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ahmad Fadhilah Gumantara. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
