@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio - Ahmad Fadhilah Gumantara</title>
     <meta name="description" content="Halaman portofolio resmi Ahmad Fadhilah Gumantara.">
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Sticky Navbar -->
@@ -15,6 +14,7 @@
             <a href="#profile" class="nav-item">Profil</a>
             <a href="#matakuliah" class="nav-item">Mata Kuliah</a>
             <a href="#tugas" class="nav-item">Tugas</a>
+            <a href="#dokumentasi" class="nav-item">Dokumentasi</a>
         </div>
         <!-- Toggle Dark Mode di dalam Navbar -->
         <button id="darkModeToggle" class="theme-toggle" aria-label="Toggle Dark Mode">
@@ -116,10 +116,24 @@
         </div>
     </section>
 
+    <!-- Seksi Dokumentasi Teknis -->
+    <section id="dokumentasi" class="full-width-section section-dark">
+        <div class="container text-start mt-5 mb-5">
+            <h3 class="section-title text-center mb-4">Dokumentasi Teknis & Arsitektur</h3>
+            <div class="about-text" style="text-align: justify; line-height: 1.8;">
+                <p><strong>1. Git & GitHub:</strong> Digunakan sebagai <em>Version Control System</em> (VCS) untuk melacak setiap perubahan baris kode, memfasilitasi manajemen <em>branch</em>, menangani <em>merge conflict</em>, dan mengelola <em>Pull Request</em> secara kolaboratif.</p>
+                <p><strong>2. npm (Node Package Manager):</strong> Berperan sebagai manajer dependensi untuk menginstal dan mengelola <em>library</em> eksternal (seperti Vite dan Bootstrap) serta mengeksekusi skrip otomatisasi melalui file <code>package.json</code>.</p>
+                <p><strong>3. TypeScript:</strong> Berfungsi sebagai <em>superset</em> dari JavaScript yang mendisiplinkan struktur data melalui <em>static typing</em> (termasuk <em>primitive, array, interface, union</em>, dan <em>generics</em>) guna meminimalisir <em>error</em> saat <em>runtime</em>.</p>
+                <p><strong>4. Vite & Environment Variables:</strong> Vite dipilih sebagai <em>build tool</em> modern untuk kompilasi lokal yang instan. <em>Environment variables</em> (file <code>.env</code>) diimplementasikan untuk memisahkan konfigurasi aplikasi rahasia dari <em>source code</em> utama demi keamanan data.</p>
+                <p><strong>5. Peran Compiler, Transpiler, dan Bundler:</strong> TypeScript bertindak sebagai <strong>Transpiler/Compiler</strong> yang menerjemahkan kode TS yang ketat menjadi Vanilla JavaScript agar dapat dibaca oleh <em>browser</em>. Sementara itu, Vite bertindak sebagai <strong>Bundler</strong> yang bertugas memaketkan dan mengoptimalkan seluruh aset (HTML, CSS, JS) menjadi satu direktori <code>dist/</code> yang ringan untuk diunggah ke <em>server</em> produksi (Netlify).</p>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2026 Ahmad Fadhilah Gumantara. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
