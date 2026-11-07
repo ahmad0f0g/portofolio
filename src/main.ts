@@ -1,61 +1,131 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Injeksi JS untuk fungsionalitas Modal
 import './style.css';
 
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // =========================================
-    // 1. FITUR DARK MODE (Local Storage)
-    // =========================================
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const body = document.body;
-    
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-    }
-    
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', function() {
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    }
+// 1. Tipe Primitive & Union
+type StatusTugas = "Selesai" | "Belum";
 
-    // =========================================
-    // 2. FITUR SCROLLSPY (Intersection Observer API)
-    // =========================================
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-item');
+// 2. Interface
+interface Tugas {
+    id: number;
+    namaTugas: string;
+    matakuliah: string;
+    deadline: string;
+    status: StatusTugas;
+}
 
-    // Pengaturan jarak sensor gulir (menyesuaikan tinggi navbar)
-    const observerOptions = {
-        root: null,
-        rootMargin: '-65px 0px -70% 0px', 
-        threshold: 0
-    };
+// 3. Generics untuk Local Storage (Syarat Penilaian Lanjutan)
+function getStorage<T>(key: string, defaultValue: T): T {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : defaultValue;
+}
+function setStorage<T>(key: string, value: T): void {
+    localStorage.setItem(key, JSON.stringify(value));
+}
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Hapus penanda aktif dari semua link
-                navItems.forEach(item => item.classList.remove('active'));
-                
-                // Tambahkan penanda aktif hanya pada seksi yang sedang terlihat
-                const activeId = entry.target.getAttribute('id');
-                const activeLink = document.querySelector(`.nav-item[href="#${activeId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-            }
-        });
-    }, observerOptions);
+// 4. Array Berbasis Interface
+let daftarTugas: Tugas[] = getStorage<Tugas[]>('dataTugas', []);
 
-    sections.forEach(sec => {
-        observer.observe(sec);
+// DOM Elements - Form Tambah
+const listTugas = document.getElementById('listTugas') as HTMLUListElement;
+const btnTambah = document.getElementById('btnTambah') as HTMLButtonElement;
+const inputNama = document.getElementById('inputNamaTugas') as HTMLInputElement;
+const inputMatkul = document.getElementById('inputMatakuliah') as HTMLInputElement;
+const inputDeadline = document.getElementById('inputDeadline') as HTMLInputElement;
+
+// DOM Elements - Modal Edit
+const editId = document.getElementById('editId') as HTMLInputElement;
+const editNama = document.getElementById('editNama') as HTMLInputElement;
+const editMatkul = document.getElementById('editMatkul') as HTMLInputElement;
+const editDeadline = document.getElementById('editDeadline') as HTMLInputElement;
+const btnSimpanEdit = document.getElementById('btnSimpanEdit') as HTMLButtonElement;
+
+// Instansiasi Modal Bootstrap (Bypass tipe TS murni dengan 'any' declare)
+declare var bootstrap: any;
+const modalInstansi = new bootstrap.Modal(document.getElementById('modalEdit'));
+
+function renderTugas(): void {
+    listTugas.innerHTML = '';
+    daftarTugas.forEach(tugas => {
+        const isSelesai = tugas.status === 'Selesai';
+        const li = document.createElement('li');
+        li.className = `list-group-item d-flex justify-content-between align-items-center ${isSelesai ? 'list-group-item-success' : 'list-group-item-dark'}`;
+        
+        li.innerHTML = `
+            <div class="text-start">
+                <strong>${tugas.namaTugas}</strong> (${tugas.matakuliah})<br>
+                <small class="text-muted">Deadline: ${new Date(tugas.deadline).toLocaleString('id-ID')}</small><br>
+                <span class="badge ${isSelesai ? 'bg-success' : 'bg-danger'}">${tugas.status}</span>
+            </div>
+            <div>
+                <button class="btn btn-sm btn-success me-1" onclick="toggleStatus(${tugas.id})">✔</button>
+                <button class="btn btn-sm btn-warning me-1" onclick="bukaModalEdit(${tugas.id})">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="hapusTugas(${tugas.id})">✖</button>
+            </div>
+        `;
+        listTugas.appendChild(li);
     });
+}
 
-    console.log("Single Page Application siap dijalankan.");
+// Logika Tambah (Create)
+btnTambah.addEventListener('click', () => {
+    if (!inputNama.value || !inputMatkul.value || !inputDeadline.value) {
+        alert("Harap isi seluruh field data tugas!");
+        return;
+    }
+    const tugasBaru: Tugas = {
+        id: Date.now(),
+        namaTugas: inputNama.value,
+        matakuliah: inputMatkul.value,
+        deadline: inputDeadline.value,
+        status: "Belum"
+    };
+    daftarTugas.push(tugasBaru);
+    setStorage('dataTugas', daftarTugas);
+    inputNama.value = ''; inputMatkul.value = ''; inputDeadline.value = '';
+    renderTugas();
 });
+
+// Mengekspos fungsi global agar bisa dipanggil dari inline HTML onClick
+(window as any).toggleStatus = (id: number) => {
+    const index = daftarTugas.findIndex(t => t.id === id);
+    if (index !== -1) {
+        daftarTugas[index].status = daftarTugas[index].status === "Selesai" ? "Belum" : "Selesai";
+        setStorage('dataTugas', daftarTugas);
+        renderTugas();
+    }
+};
+
+(window as any).hapusTugas = (id: number) => {
+    daftarTugas = daftarTugas.filter(t => t.id !== id);
+    setStorage('dataTugas', daftarTugas);
+    renderTugas();
+};
+
+(window as any).bukaModalEdit = (id: number) => {
+    const tugas = daftarTugas.find(t => t.id === id);
+    if (tugas) {
+        editId.value = tugas.id.toString();
+        editNama.value = tugas.namaTugas;
+        editMatkul.value = tugas.matakuliah;
+        editDeadline.value = tugas.deadline;
+        modalInstansi.show();
+    }
+};
+
+// Logika Simpan Update
+btnSimpanEdit.addEventListener('click', () => {
+    const id = parseInt(editId.value);
+    const index = daftarTugas.findIndex(t => t.id === id);
+    if (index !== -1) {
+        daftarTugas[index].namaTugas = editNama.value;
+        daftarTugas[index].matakuliah = editMatkul.value;
+        daftarTugas[index].deadline = editDeadline.value;
+        setStorage('dataTugas', daftarTugas);
+        renderTugas();
+        modalInstansi.hide();
+    }
+});
+
+// Render awal saat halaman dimuat
+renderTugas();

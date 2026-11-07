@@ -109,6 +109,36 @@
 
     <!-- 4. Tugas Section (Full Width) -->
     <section id="tugas" class="full-width-section section-light">
+        <!-- 1. Form Tambah Tugas -->
+        <div class="row mb-4">
+            <div class="col-md-3"><input type="text" id="inputNamaTugas" class="form-control" placeholder="Nama Tugas"></div>
+            <div class="col-md-3"><input type="text" id="inputMatakuliah" class="form-control" placeholder="Mata Kuliah"></div>
+            <div class="col-md-4"><input type="datetime-local" id="inputDeadline" class="form-control"></div>
+            <div class="col-md-2"><button id="btnTambah" class="btn btn-primary w-100">Tambah</button></div>
+        </div>
+        <ul id="listTugas" class="list-group mb-5"></ul>
+
+        <!-- 2. Bootstrap Modal Edit (Statis) -->
+        <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content text-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Tugas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="editId">
+                        <input type="text" id="editNama" class="form-control mb-2" placeholder="Nama Tugas">
+                        <input type="text" id="editMatkul" class="form-control mb-2" placeholder="Mata Kuliah">
+                        <input type="datetime-local" id="editDeadline" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" id="btnSimpanEdit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container text-center">
             <h3 class="section-title">Kumpulan Tugas</h3>
             <h1 class="coming-soon">Coming Soon</h1>
