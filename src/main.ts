@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Injeksi JS untuk fungsionalitas Modal
+import * as bootstrap from 'bootstrap'; // Injeksi JS untuk fungsionalitas Modal
 import './style.css';
 
 // 1. Tipe Primitive & Union
@@ -40,9 +40,8 @@ const editMatkul = document.getElementById('editMatkul') as HTMLInputElement;
 const editDeadline = document.getElementById('editDeadline') as HTMLInputElement;
 const btnSimpanEdit = document.getElementById('btnSimpanEdit') as HTMLButtonElement;
 
-// Instansiasi Modal Bootstrap (Bypass tipe TS murni dengan 'any' declare)
-declare var bootstrap: any;
-const modalInstansi = new bootstrap.Modal(document.getElementById('modalEdit'));
+// Instansiasi Modal Bootstrap (Baris declare dihapus untuk mengatasi ts(2440))
+const modalInstansi = new bootstrap.Modal(document.getElementById('modalEdit') as HTMLElement);
 
 function renderTugas(): void {
     listTugas.innerHTML = '';
@@ -90,7 +89,8 @@ btnTambah.addEventListener('click', () => {
 (window as any).toggleStatus = (id: number) => {
     const index = daftarTugas.findIndex(t => t.id === id);
     if (index !== -1) {
-        daftarTugas[index].status = daftarTugas[index].status === "Selesai" ? "Belum" : "Selesai";
+        // Menggunakan tanda seru (!) untuk mengatasi ts(2532)
+        daftarTugas[index]!.status = daftarTugas[index]!.status === "Selesai" ? "Belum" : "Selesai";
         setStorage('dataTugas', daftarTugas);
         renderTugas();
     }
@@ -118,9 +118,10 @@ btnSimpanEdit.addEventListener('click', () => {
     const id = parseInt(editId.value);
     const index = daftarTugas.findIndex(t => t.id === id);
     if (index !== -1) {
-        daftarTugas[index].namaTugas = editNama.value;
-        daftarTugas[index].matakuliah = editMatkul.value;
-        daftarTugas[index].deadline = editDeadline.value;
+        // Menggunakan tanda seru (!) untuk mengatasi ts(2532)
+        daftarTugas[index]!.namaTugas = editNama.value;
+        daftarTugas[index]!.matakuliah = editMatkul.value;
+        daftarTugas[index]!.deadline = editDeadline.value;
         setStorage('dataTugas', daftarTugas);
         renderTugas();
         modalInstansi.hide();

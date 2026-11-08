@@ -109,14 +109,19 @@
 
     <!-- 4. Tugas Section (Full Width) -->
     <section id="tugas" class="full-width-section section-light">
-        <!-- 1. Form Tambah Tugas -->
-        <div class="row mb-4">
-            <div class="col-md-3"><input type="text" id="inputNamaTugas" class="form-control" placeholder="Nama Tugas"></div>
-            <div class="col-md-3"><input type="text" id="inputMatakuliah" class="form-control" placeholder="Mata Kuliah"></div>
-            <div class="col-md-4"><input type="datetime-local" id="inputDeadline" class="form-control"></div>
-            <div class="col-md-2"><button id="btnTambah" class="btn btn-primary w-100">Tambah</button></div>
+        <div class="container mb-4">
+            <h3 class="section-title text-center mb-4">Kumpulan Tugas</h3>
+            
+            <!-- 1. Form Tambah Tugas -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-2"><input type="text" id="inputNamaTugas" class="form-control" placeholder="Nama Tugas"></div>
+                <div class="col-md-3 mb-2"><input type="text" id="inputMatakuliah" class="form-control" placeholder="Mata Kuliah"></div>
+                <div class="col-md-4 mb-2"><input type="datetime-local" id="inputDeadline" class="form-control"></div>
+                <div class="col-md-2 mb-2"><button id="btnTambah" class="btn btn-primary w-100">Tambah</button></div>
+            </div>
+            
+            <ul id="listTugas" class="list-group mb-5"></ul>
         </div>
-        <ul id="listTugas" class="list-group mb-5"></ul>
 
         <!-- 2. Bootstrap Modal Edit (Statis) -->
         <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
@@ -138,9 +143,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container text-center">
-            <h3 class="section-title">Kumpulan Tugas</h3>
         </div>
     </section>
 
