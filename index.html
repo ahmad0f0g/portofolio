@@ -173,6 +173,19 @@
         </div>
     </section>
 
+    <section id="dokumentasi" class="full-width-section section-dark">
+        <div class="container text-start mt-5 mb-5">
+            <h3 class="section-title text-center mb-4">Dokumentasi Teknis & Arsitektur</h3>
+            <div class="about-text" style="text-align: justify; line-height: 1.8;">
+                <p><strong>1. Struktur Komponen React:</strong> Aplikasi ini dibangun menggunakan pendekatan berbasis komponen modular di dalam direktori <code>src/components/</code>, yang terdiri atas <code>App.jsx</code> (komponen utama pengelola state), <code>Header.jsx</code> (tampilan judul), <code>ActivityForm.jsx</code> (formulir input interaktif), <code>ActivityList.jsx</code> (daftar penampil list), dan <code>ActivityItem.jsx</code> (kartu item individual).</p>
+                <p><strong>2. Penggunaan Props:</strong> Berfungsi sebagai mekanisme pengaliran data dan fungsi pengendali (*handler*) secara satu arah dari komponen induk (<code>App.jsx</code>) turun ke komponen anak agar data antarmuka tetap sinkron dan terstruktur.</p>
+                <p><strong>3. Penggunaan State (<code>useState</code> & <code>useEffect</code>):</strong> <em>State</em> digunakan untuk merekam dan memperbarui daftar array kegiatan secara dinamis setiap kali terjadi interaksi pengguna. Dipadukan dengan <code>useEffect</code> dan <em>browser</em> <code>localStorage</code> guna memastikan seluruh data kegiatan tetap tersimpan secara persisten meskipun peramban ditutup.</p>
+                <p><strong>4. Event Handling:</strong> Diterapkan untuk merespons tindakan pengguna secara langsung pada antarmuka, seperti menangani <em>event</em> pengiriman form (<code>onSubmit</code>) saat menambah data, serta klik tombol (<code>onClick</code>) untuk mengubah status selesai maupun menghapus kegiatan.</p>
+                <p><strong>5. Deployment & Version Control:</strong> Seluruh kode sumber dikelola menggunakan Git dan GitHub dengan standar 5 <em>commit</em> logis, lalu dipublikasikan secara otomatis (*deployment*) ke server produksi Netlify dengan standardisasi penamaan file PascalCase.</p>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2026 Ahmad Fadhilah Gumantara. All rights reserved.</p>
     </footer>
